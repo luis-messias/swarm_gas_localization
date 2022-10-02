@@ -1,0 +1,108 @@
+<!-- mission file for GADEN player -->
+
+<launch>  
+    <arg name="scenario" default="variavel_empty_room" />
+    <include file="$(find test_env)/$(arg scenario)/launch/GADEN_player_env.launch" />
+
+    <node pkg="swarm_visualization" type="swarm_node.py" name="swarm_node" output="screen">
+        <rosparam command="load" file="$(find swarm_visualization)/config/swarm_gaden_10.yaml" />
+    </node>
+    
+    <node pkg="swarm_control" type="controller_node.py" name="controller_node" output="screen">
+        <rosparam command="load" file="$(find swarm_control)/config/controller_10.yaml" />
+    </node>
+    
+       
+    ### NODE Simulated Gas Sensor ###
+    #--------------------------------
+    # SENSOR MODELS: 
+    # MOX: TGS2620=0, TGS2600=1, TGS2611=2
+    # PID: MiniRaeLite=30
+   
+    <group ns="Mox0">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="1" />
+	        <param name="/sensor_frame" value="swarm_node_0" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox1">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="1" />
+	        <param name="/sensor_frame" value="swarm_node_1" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+    
+    <group ns="Mox2">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="1" />
+	        <param name="/sensor_frame" value="swarm_node_2" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox3">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="2" />
+	        <param name="/sensor_frame" value="swarm_node_3" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox4">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="2" />
+	        <param name="/sensor_frame" value="swarm_node_4" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox5">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="2" />
+	        <param name="/sensor_frame" value="swarm_node_5" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox6">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="2" />
+	        <param name="/sensor_frame" value="swarm_node_6" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox7">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="2" />
+	        <param name="/sensor_frame" value="swarm_node_7" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox8">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="2" />
+	        <param name="/sensor_frame" value="swarm_node_8" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    <group ns="Mox9">
+        <node pkg="simulated_gas_sensor" type="simulated_gas_sensor" name="fake_mox" output="screen">
+	        <param name="/sensor_model" value="1" />
+	        <param name="/sensor_frame" value="swarm_node_9" />
+	        <param name="/fixed_frame" value="map"/>	        
+        </node>
+    </group>
+
+    
+    ### RQT PLOT Sensors ###
+    #-----------------------
+    <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot1"  args="/Mox0/Sensor_reading/raw /Mox1/Sensor_reading/raw /Mox2/Sensor_reading/raw /Mox3/Sensor_reading/raw /Mox4/Sensor_reading/raw /Mox5/Sensor_reading/raw /Mox6/Sensor_reading/raw /Mox7/Sensor_reading/raw /Mox8/Sensor_reading/raw /Mox9/Sensor_reading/raw"/>
+     
+     
+</launch>
